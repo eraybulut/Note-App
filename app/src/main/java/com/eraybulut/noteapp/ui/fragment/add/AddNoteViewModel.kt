@@ -17,10 +17,9 @@ class AddNoteViewModel(application: Application) : BaseViewModel(application) {
         noteRepository = NoteRepository(noteDao)
     }
 
-    fun addNote(title : String,note:String){
-        val noteModel = Note(0,title,note,"11")
+    fun addNote(note: Note){
         viewModelScope.launch {
-            noteRepository.addNote(noteModel)
+            noteRepository.addNote(note)
         }
     }
 

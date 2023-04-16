@@ -12,32 +12,84 @@
         android:layout_height="match_parent"
         android:orientation="vertical">
 
+        <TextView
+            android:id="@+id/currentDate"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="right"
+            android:textSize="18sp"
+            android:fontFamily="@font/satoshi_medium"
+            android:layout_marginHorizontal="20dp"
+            android:layout_marginTop="16dp"/>
 
         <EditText
             android:id="@+id/titleEditText"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:ems="10"
+            android:paddingHorizontal="10dp"
+            android:layout_marginTop="20dp"
+            android:singleLine="true"
+            android:imeOptions="actionDone"
+            android:paddingVertical="10dp"
+            android:layout_marginHorizontal="20dp"
+            android:background="@drawable/press_drawable"
             android:inputType="textPersonName"
-            android:text="Name"
+            android:hint="@string/addTitle"
             tools:layout_editor_absoluteX="96dp"
             tools:layout_editor_absoluteY="72dp" />
 
         <EditText
             android:id="@+id/noteEditText"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="300dp"
             android:ems="10"
-            android:inputType="textPersonName"
-            android:text="Name"
+            android:hint="@string/addNote"
+            android:paddingHorizontal="10dp"
+            android:layout_marginTop="20dp"
+            android:gravity="top"
+            android:imeOptions="actionDone"
+            android:paddingVertical="10dp"
+            android:layout_marginHorizontal="20dp"
+            android:background="@drawable/press_drawable"
+            android:inputType="textMultiLine"
             tools:layout_editor_absoluteX="56dp"
             tools:layout_editor_absoluteY="221dp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/yourMode"
+            android:textSize="18sp"
+            android:fontFamily="sans-serif-medium"
+            android:layout_marginHorizontal="20dp"
+            android:layout_marginTop="16dp"/>
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/modeRecyclerView"
+            android:layout_width="match_parent"
+            android:layout_marginHorizontal="20dp"
+            android:layout_marginTop="5dp"
+            android:overScrollMode="never"
+            android:layout_height="wrap_content"/>
+
+        <View
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"/>
 
         <Button
             android:id="@+id/addButton"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Button" />
+            android:background="@drawable/rounded_10"
+            android:backgroundTint="@color/orange"
+            android:layout_marginHorizontal="16dp"
+            android:text="@string/add"
+            android:textAllCaps="false"
+            android:textSize="18sp"
+            android:layout_marginBottom="20dp"
+            android:textColor="@color/white"/>
 
 
     </LinearLayout>

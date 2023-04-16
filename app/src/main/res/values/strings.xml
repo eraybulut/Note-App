@@ -1,5 +1,13 @@
 <resources>
     <string name="app_name">Note App</string>
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="add">Ekle</string>
+    <string name="addTitle">Başlıkğınız</string>
+    <string name="addNote">Notunuz</string>
+    <string name="yourMode">Modunuz</string>
+
+
+    -------> Toast
+    <string name="emptyTitle">Başlık kısmını boş bırakmayınız</string>
+    <string name="emptyNote">Not kısmını boş bırakmayınız</string>
+    <string name="emptyMode">Mod kısmını boş bırakmayınız</string>
 </resources>

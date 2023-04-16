@@ -8,7 +8,7 @@ android {
     namespace 'com.eraybulut.noteapp'
     compileSdk 33
 
-    buildFeatures{
+    buildFeatures {
         viewBinding true
         dataBinding true
     }
@@ -46,9 +46,13 @@ dependencies {
     def navigation_version = "2.5.3"
     def viewModel_version = "2.6.1"
     def coroutine_version = "1.6.4"
+    def flexbox_version = "3.0.0"
 
     implementation 'androidx.core:core-ktx:1.10.0'
     implementation 'androidx.appcompat:appcompat:1.6.1'
+
+    //Flexbox
+    implementation "com.google.android.flexbox:flexbox:$flexbox_version"
 
     //Material
     implementation 'com.google.android.material:material:1.8.0'
