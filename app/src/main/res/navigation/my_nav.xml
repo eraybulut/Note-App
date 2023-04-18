@@ -7,16 +7,19 @@
 
     <fragment
         android:id="@+id/homeFragment"
-        android:name="com.eraybulut.noteapp.ui.fragment.home.HomeFragment"
+        android:name="com.eraybulut.noteapp.ui.home.HomeFragment"
         android:label="fragment_home"
         tools:layout="@layout/fragment_home" >
         <action
             android:id="@+id/home_to_addNoteFragment"
             app:destination="@id/addNoteFragment" />
+        <action
+            android:id="@+id/home_to_editNoteFragment"
+            app:destination="@id/editNoteFragment" />
     </fragment>
     <fragment
         android:id="@+id/addNoteFragment"
-        android:name="com.eraybulut.noteapp.ui.fragment.add.AddNoteFragment"
+        android:name="com.eraybulut.noteapp.ui.add.AddNoteFragment"
         android:label="fragment_add_note"
         tools:layout="@layout/fragment_add_note" >
         <action
@@ -24,5 +27,17 @@
             app:destination="@id/homeFragment"
             app:popUpTo="@id/addNoteFragment"
             app:popUpToInclusive="true" />
+    </fragment>
+    <fragment
+        android:id="@+id/editNoteFragment"
+        android:name="com.eraybulut.noteapp.ui.edit.EditNoteFragment"
+        android:label="fragment_edit_note"
+        tools:layout="@layout/fragment_edit_note" >
+        <argument
+            android:name="currentNote"
+            app:argType="com.eraybulut.noteapp.model.Note" />
+        <action
+            android:id="@+id/action_editNoteFragment_to_homeFragment2"
+            app:destination="@id/homeFragment" />
     </fragment>
 </navigation>

@@ -1,4 +1,4 @@
-package com.eraybulut.noteapp.ui.fragment.add
+package com.eraybulut.noteapp.ui.edit
 
 import android.app.Application
 import androidx.lifecycle.viewModelScope
@@ -8,7 +8,7 @@ import com.eraybulut.noteapp.data.repository.NoteRepository
 import com.eraybulut.noteapp.model.Note
 import kotlinx.coroutines.launch
 
-class AddNoteViewModel(application: Application) : BaseViewModel(application) {
+class EditNoteViewModel(application: Application) : BaseViewModel(application) {
 
     private val noteRepository : NoteRepository
 
@@ -17,10 +17,15 @@ class AddNoteViewModel(application: Application) : BaseViewModel(application) {
         noteRepository = NoteRepository(noteDao)
     }
 
-    fun addNote(note: Note){
+    fun deleteNote(note : Note){
         viewModelScope.launch {
-            noteRepository.addNote(note)
+            noteRepository.deleteNote(note = note)
         }
     }
 
+    fun updateNote(note : Note){
+        viewModelScope.launch {
+            noteRepository.updateNote(note = note)
+        }
+    }
 }
