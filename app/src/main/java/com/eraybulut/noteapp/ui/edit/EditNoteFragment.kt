@@ -52,7 +52,7 @@ class EditNoteFragment : BaseFragment<FragmentEditNoteBinding, EditNoteViewModel
     }
 
     private fun updateNote(title : String,note : String){
-        val noteModel = Note(args.currentNote.id,title,note,args.currentNote.mood,Tools().currentTime())
+        val noteModel = Note(args.currentNote.id,title,note,args.currentNote.mood,Tools().currentTime(),R.color.white)
         viewModel.updateNote(noteModel)
         requireContext().showToast(getString(R.string.updatedNote))
         findNavController().popBackStack()

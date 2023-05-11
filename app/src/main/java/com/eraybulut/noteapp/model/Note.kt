@@ -14,5 +14,6 @@ data class Note(
     val title : String,
     val note : String,
     val mood : String,
-    val date : String
+    val date : String,
+    val backgroundColor : Int
 ) : Parcelable

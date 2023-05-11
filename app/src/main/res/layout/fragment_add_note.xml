@@ -7,102 +7,125 @@
     tools:context=".ui.add.AddNoteFragment">
 
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical">
 
-        <TextView
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="48dp"
-            android:background="@color/orange"
-            android:text="@string/addNotes"
-            android:textColor="@color/white"
-            android:textSize="18sp"
-            android:fontFamily="@font/satoshi_bold"
-            android:gravity="center"/>
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="parent">
 
-        <TextView
-            android:id="@+id/currentDate"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="right"
-            android:textSize="18sp"
-            android:fontFamily="@font/satoshi_medium"
-            android:layout_marginHorizontal="20dp"
-            android:layout_marginTop="16dp"/>
+            <TextView
+                android:id="@+id/textView3"
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                android:background="@color/black"
+                android:fontFamily="@font/satoshi_bold"
+                android:gravity="center"
+                android:text="@string/addNotes"
+                android:textColor="@color/white"
+                android:textSize="18sp" />
 
-        <EditText
-            android:id="@+id/titleEditText"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:ems="10"
-            android:paddingHorizontal="10dp"
-            android:layout_marginTop="20dp"
-            android:singleLine="true"
-            android:imeOptions="actionDone"
-            android:paddingVertical="10dp"
-            android:layout_marginHorizontal="20dp"
-            android:background="@drawable/press_drawable"
-            android:inputType="textPersonName"
-            android:hint="@string/addTitle"
-            tools:layout_editor_absoluteX="96dp"
-            tools:layout_editor_absoluteY="72dp" />
+            <TextView
+                android:id="@+id/currentDate"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="right"
+                android:layout_marginHorizontal="20dp"
+                android:layout_marginTop="16dp"
+                android:fontFamily="@font/satoshi_medium"
+                android:textSize="18sp" />
 
-        <EditText
-            android:id="@+id/noteEditText"
-            android:layout_width="match_parent"
-            android:layout_height="300dp"
-            android:ems="10"
-            android:hint="@string/addNote"
-            android:paddingHorizontal="10dp"
-            android:layout_marginTop="20dp"
-            android:gravity="top"
-            android:imeOptions="actionDone"
-            android:paddingVertical="10dp"
-            android:layout_marginHorizontal="20dp"
-            android:background="@drawable/press_drawable"
-            android:inputType="textMultiLine"
-            tools:layout_editor_absoluteX="56dp"
-            tools:layout_editor_absoluteY="221dp" />
+            <EditText
+                android:id="@+id/titleEditText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="20dp"
+                android:layout_marginTop="20dp"
+                android:background="@drawable/press_drawable"
+                android:ems="10"
+                android:hint="@string/addTitle"
+                android:imeOptions="actionDone"
+                android:inputType="textPersonName"
+                android:paddingHorizontal="10dp"
+                android:paddingVertical="10dp"
+                android:singleLine="true"
+                tools:layout_editor_absoluteX="96dp"
+                tools:layout_editor_absoluteY="72dp" />
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/yourMode"
-            android:textSize="18sp"
-            android:fontFamily="sans-serif-medium"
-            android:layout_marginHorizontal="20dp"
-            android:layout_marginTop="16dp"/>
+            <EditText
+                android:id="@+id/noteEditText"
+                android:layout_width="match_parent"
+                android:layout_weight="1"
+                android:layout_height="0dp"
+                android:layout_marginHorizontal="20dp"
+                android:layout_marginTop="20dp"
+                android:background="@drawable/press_drawable"
+                android:ems="10"
+                android:gravity="top"
+                android:hint="@string/addNote"
+                android:imeOptions="actionDone"
+                android:inputType="textMultiLine"
+                android:paddingHorizontal="10dp"
+                android:paddingVertical="10dp"
+                tools:layout_editor_absoluteX="56dp"
+                tools:layout_editor_absoluteY="221dp" />
 
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/modeRecyclerView"
-            android:layout_width="match_parent"
-            android:layout_marginHorizontal="20dp"
-            android:layout_marginTop="5dp"
-            android:overScrollMode="never"
-            android:layout_height="wrap_content"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="20dp"
+                android:layout_marginTop="16dp"
+                android:fontFamily="sans-serif-medium"
+                android:text="@string/yourMode"
+                android:textSize="18sp" />
 
-        <View
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"/>
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/modeRecyclerView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="20dp"
+                android:layout_marginTop="5dp"
+                android:overScrollMode="never" />
 
-        <Button
-            android:id="@+id/addButton"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@drawable/rounded_10"
-            android:backgroundTint="@color/orange"
-            android:layout_marginHorizontal="16dp"
-            android:text="@string/add"
-            android:textAllCaps="false"
-            android:textSize="18sp"
-            android:layout_marginBottom="20dp"
-            android:textColor="@color/white"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="20dp"
+                android:layout_marginTop="16dp"
+                android:fontFamily="sans-serif-medium"
+                android:text="@string/yourColor"
+                android:textSize="18sp" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/colorRecyclerView"
+                android:layout_width="match_parent"
+                android:layout_height="30dp"
+                android:layout_marginTop="5dp"
+                android:clipToPadding="false"
+                android:paddingStart="20dp"
+                android:overScrollMode="never" />
 
 
-    </LinearLayout>
+            <Button
+                android:id="@+id/addButton"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="16dp"
+                android:layout_marginTop="20dp"
+                android:layout_marginBottom="20dp"
+                android:background="@drawable/rounded_10"
+                android:backgroundTint="@color/black"
+                android:text="@string/add"
+                android:textAllCaps="false"
+                android:textColor="@color/white"
+                android:textSize="18sp" />
+
+
+        </LinearLayout>
+
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

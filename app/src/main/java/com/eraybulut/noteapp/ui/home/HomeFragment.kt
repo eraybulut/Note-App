@@ -6,14 +6,17 @@ import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import com.eraybulut.noteapp.R
 import com.eraybulut.noteapp.common.BaseFragment
 import com.eraybulut.noteapp.databinding.FragmentHomeBinding
 import com.eraybulut.noteapp.model.Note
 import com.eraybulut.noteapp.service.SwipeToDeleteCallback
 import com.eraybulut.noteapp.service.Tools
+import com.eraybulut.noteapp.utils.extensions.gone
 import com.eraybulut.noteapp.utils.extensions.onClick
 import com.eraybulut.noteapp.utils.extensions.showToast
+import com.eraybulut.noteapp.utils.extensions.visibly
 
 class HomeFragment : BaseFragment<FragmentHomeBinding, HomeFragmentViewModel>(
     FragmentHomeBinding::inflate)
@@ -44,7 +47,6 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomeFragmentViewModel>(
         val swipeToDeleteCallback = SwipeToDeleteCallback(noteAdapter)
         val itemTouchHelper = ItemTouchHelper(swipeToDeleteCallback)
         binding.noteRecyclerView.apply {
-            layoutManager = LinearLayoutManager(requireContext())
             adapter = noteAdapter
             itemTouchHelper.attachToRecyclerView(this)
         }
@@ -57,10 +59,12 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomeFragmentViewModel>(
     }
 
     override fun observeEvents() {
-        viewModel.readAllData.observe(viewLifecycleOwner, Observer {
-           noteAdapter.setData(ArrayList(it))
+        viewModel.readAllData.observe(viewLifecycleOwner, Observer { noteData->
+            if (noteData.isNullOrEmpty()) binding.dontHaveNoteLayout.visibly()
+            else{
+                noteAdapter.setData(ArrayList(noteData))
+                binding.dontHaveNoteLayout.gone()
+            }
         })
-
-
     }
 }

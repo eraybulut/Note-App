@@ -1,0 +1,30 @@
+<resources>
+    <string name="app_name">Note</string>
+    <string name="add">Ekle</string>
+    <string name="addTitle">Başlıkğınız</string>
+    <string name="addNote">Notunuz</string>
+    <string name="addNotes">Not Ekle</string>
+    <string name="myNotes">Notlarım</string>
+    <string name="editNote">Not Düzenle</string>
+    <string name="updatedNote">Not Güncelendi</string>
+    <string name="yourMode">Modunuz</string>
+    <string name="yourColor">Not Rengi</string>
+    <string name="noteSharedSuccessfully">Not başarıyla paylaşıldı</string>
+    <string name="deleteNotedSuccessfully">Not başarıyla silindi</string>
+    <string name="notHaveNote">Herhangi bir notunuz yok, hemen yeni bir not ekleyin</string>
+
+
+    ------->Mode
+    <string name="modeHappy">😀 Mutlu</string>
+    <string name="modeSad">😞 Üzgün</string>
+    <string name="modeNotr">😐 Nötr</string>
+    <string name="modeInspiration">🥳 İlham Geldi</string>
+    <string name="modeStar">🤩 Star Fikir</string>
+    <string name="modeApplicationIdea">📱 Uygulama Fikri</string>
+
+
+    -------> Toast
+    <string name="emptyTitle">Başlık kısmını boş bırakmayınız</string>
+    <string name="emptyNote">Not kısmını boş bırakmayınız</string>
+    <string name="emptyMode">Mod kısmını boş bırakmayınız</string>
+</resources>

@@ -6,12 +6,39 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".ui.home.HomeFragment">
 
+    <LinearLayout
+        android:id="@+id/dontHaveNoteLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="@+id/noteRecyclerView"
+        app:layout_constraintTop_toBottomOf="@+id/textView">
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="300dp"
+            android:layout_marginTop="24dp"
+            android:src="@drawable/img_empty_note"
+            android:visibility="visible" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="20dp"
+            android:fontFamily="@font/satoshi_medium"
+            android:text="@string/notHaveNote"
+            android:textAlignment="center"
+            android:textColor="@color/black"
+            android:textSize="18dp" />
+
+    </LinearLayout>
 
     <TextView
         android:id="@+id/textView"
         android:layout_width="match_parent"
         android:layout_height="48dp"
-        android:background="@color/orange"
+        android:background="@color/black"
         android:fontFamily="@font/satoshi_bold"
         android:gravity="center"
         android:text="@string/myNotes"
@@ -26,6 +53,7 @@
         android:id="@+id/noteRecyclerView"
         android:layout_width="0dp"
         android:layout_height="0dp"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
         android:paddingTop="16dp"
         android:clipToPadding="false"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -46,7 +74,7 @@
         android:tint="@color/white"
         android:src="@drawable/img_add"
         android:elevation="1dp"
-        app:backgroundTint="@color/orange"
+        app:backgroundTint="@color/black"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
 

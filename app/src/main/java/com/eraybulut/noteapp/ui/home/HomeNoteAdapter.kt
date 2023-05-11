@@ -6,6 +6,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.eraybulut.noteapp.databinding.ItemNoteBinding
 import com.eraybulut.noteapp.model.Note
+import com.eraybulut.noteapp.utils.extensions.setTintColor
 
 class HomeNoteAdapter(
     private val listener: NoteItemClickListener
@@ -16,6 +17,7 @@ class HomeNoteAdapter(
     inner class CardViewHolder(private val binding: ItemNoteBinding) :
         RecyclerView.ViewHolder(binding.root) {
         fun bind(listener: NoteItemClickListener, note: Note) {
+            binding.itemNoteRoot.setTintColor(note.backgroundColor)
             binding.onClickItem = listener
             binding.currentNote = note
             binding.executePendingBindings()

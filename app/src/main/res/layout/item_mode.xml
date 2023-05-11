@@ -9,7 +9,7 @@
 
         <variable
             name="onItemClickListener"
-            type="com.eraybulut.noteapp.ui.add.ModeItemClickListener" />
+            type="com.eraybulut.noteapp.ui.add.MoteItemClickListener" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout

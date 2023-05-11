@@ -8,4 +8,14 @@
     <color name="lightGray">#EAEAEA</color>
     <color name="lightWhite">#FBF9FA</color>
     <color name="blue">#03A9F4</color>
+
+    <color name="color1">#B9D2D2</color>
+    <color name="color2">#EEEEEE</color>
+    <color name="color3">#CBE4DE</color>
+    <color name="color4">#DBD8E3</color>
+    <color name="color5">#FF6D60</color>
+    <color name="color6">#F7D060</color>
+    <color name="color7">#643A6B</color>
+    <color name="color8">#DDFFBB</color>
+    <color name="color9">#B9F3FC</color>
 </resources>

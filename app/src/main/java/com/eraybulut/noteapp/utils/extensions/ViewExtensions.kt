@@ -30,6 +30,10 @@ fun View.onClick(onClick: (View) -> Unit) {
     setOnClickListener(onClick)
 }
 
+fun View.setTintColor(@ColorRes colorRes: Int){
+    background.setTint(ContextCompat.getColor(context,colorRes))
+}
+
 fun View.setBackgroundColorRes(@ColorRes colorRes: Int) {
     setBackgroundColor(ContextCompat.getColor(context, colorRes))
 }
