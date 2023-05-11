@@ -1,6 +1,8 @@
 package com.eraybulut.noteapp.ui.home
 
+import android.annotation.SuppressLint
 import android.util.Log
+import android.view.MotionEvent
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
@@ -17,39 +19,19 @@ import com.eraybulut.noteapp.utils.extensions.gone
 import com.eraybulut.noteapp.utils.extensions.onClick
 import com.eraybulut.noteapp.utils.extensions.showToast
 import com.eraybulut.noteapp.utils.extensions.visibly
+import java.util.Timer
+import kotlin.concurrent.fixedRateTimer
 
 class HomeFragment : BaseFragment<FragmentHomeBinding, HomeFragmentViewModel>(
-    FragmentHomeBinding::inflate)
-{
+    FragmentHomeBinding::inflate
+) {
 
     private lateinit var noteAdapter: HomeNoteAdapter
     override val viewModel by viewModels<HomeFragmentViewModel>()
 
     override fun onCreateFinished() {
-
-        noteAdapter = HomeNoteAdapter(object : NoteItemClickListener{
-            override fun onItemClick(note: Note) {
-                val action = HomeFragmentDirections.homeToEditNoteFragment(currentNote = note)
-                findNavController().navigate(action)
-            }
-
-            override fun onDeleteItem(note: Note) {
-                viewModel.deleteNote( note = note)
-                requireContext().showToast(getString(R.string.deleteNotedSuccessfully))
-            }
-
-            override fun onShareItem(note: Note) {
-                Tools().shareText(requireContext(), note = note)
-            }
-        })
-
-
-        val swipeToDeleteCallback = SwipeToDeleteCallback(noteAdapter)
-        val itemTouchHelper = ItemTouchHelper(swipeToDeleteCallback)
-        binding.noteRecyclerView.apply {
-            adapter = noteAdapter
-            itemTouchHelper.attachToRecyclerView(this)
-        }
+        setupHomeRecyclerView()
+        setupSwipeToView()
     }
 
     override fun initializeListeners() {
@@ -59,12 +41,39 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomeFragmentViewModel>(
     }
 
     override fun observeEvents() {
-        viewModel.readAllData.observe(viewLifecycleOwner, Observer { noteData->
+        viewModel.readAllData.observe(viewLifecycleOwner, Observer { noteData ->
             if (noteData.isNullOrEmpty()) binding.dontHaveNoteLayout.visibly()
-            else{
+            else {
                 noteAdapter.setData(ArrayList(noteData))
                 binding.dontHaveNoteLayout.gone()
             }
         })
+    }
+
+    private fun setupHomeRecyclerView(){
+        noteAdapter = HomeNoteAdapter(object : NoteItemClickListener {
+            override fun onItemClick(note: Note) {
+                val action = HomeFragmentDirections.homeToEditNoteFragment(currentNote = note)
+                findNavController().navigate(action)
+            }
+
+            override fun onDeleteItem(note: Note) {
+                viewModel.deleteNote(note = note)
+                requireContext().showToast(getString(R.string.deleteNotedSuccessfully))
+            }
+
+            override fun onShareItem(note: Note) {
+                Tools().shareText(requireContext(), note = note)
+            }
+        })
+    }
+
+    private fun setupSwipeToView(){
+        val swipeToDeleteCallback = SwipeToDeleteCallback(noteAdapter)
+        val itemTouchHelper = ItemTouchHelper(swipeToDeleteCallback)
+        binding.noteRecyclerView.apply {
+            adapter = noteAdapter
+            itemTouchHelper.attachToRecyclerView(this)
+        }
     }
 }

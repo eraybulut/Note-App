@@ -2,7 +2,7 @@
     <string name="app_name">Note</string>
     <string name="add">Add</string>
     <string name="addTitle">Note Title</string>
-    <string name="addNote">Your Mote</string>
+    <string name="addNote">Your Note</string>
     <string name="addNotes">Add Note</string>
     <string name="myNotes">My Notes</string>
     <string name="editNote">Edit Note</string>
@@ -21,6 +21,7 @@
     <string name="modeInspiration">🥳 Inspiration Came</string>
     <string name="modeStar">🤩 Star Idea</string>
     <string name="modeApplicationIdea">📱 Application Idea</string>
+    <string name="modeWork">💼 Work</string>
 
 
     -------> Toast

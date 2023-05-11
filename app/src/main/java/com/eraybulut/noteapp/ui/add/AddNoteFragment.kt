@@ -63,6 +63,7 @@ class AddNoteFragment : BaseFragment<FragmentAddNoteBinding, AddNoteViewModel>(
         modeArrayList.add(getString(R.string.modeInspiration))
         modeArrayList.add(getString(R.string.modeStar))
         modeArrayList.add(getString(R.string.modeApplicationIdea))
+        modeArrayList.add(getString(R.string.modeWork))
 
 
         binding.modeRecyclerView.apply {
