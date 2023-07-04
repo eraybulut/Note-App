@@ -1,6 +1,5 @@
 package com.eraybulut.noteapp.ui.add
 
-import android.util.Log
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -8,44 +7,48 @@ import com.eraybulut.noteapp.R
 import com.eraybulut.noteapp.common.BaseFragment
 import com.eraybulut.noteapp.databinding.FragmentAddNoteBinding
 import com.eraybulut.noteapp.model.Note
-import com.eraybulut.noteapp.service.Tools
+import com.eraybulut.noteapp.utils.Tools
 import com.eraybulut.noteapp.utils.extensions.getTextString
-import com.eraybulut.noteapp.utils.extensions.onClick
-import com.eraybulut.noteapp.utils.extensions.setBackgroundColorRes
 import com.eraybulut.noteapp.utils.extensions.showToast
 import com.google.android.flexbox.FlexboxLayoutManager
+import dagger.hilt.android.AndroidEntryPoint
+import java.util.Locale
 
+@AndroidEntryPoint
 class AddNoteFragment : BaseFragment<FragmentAddNoteBinding, AddNoteViewModel>(
     FragmentAddNoteBinding::inflate)
 {
     override val viewModel by viewModels<AddNoteViewModel>()
+    private lateinit var modeAdapter : ModeAdapter
+    private lateinit var colorAdapter : ColorAdapter
     private var selectedMood : String? = null
     private var selectedBackgroundColor : Int? = null
-    private lateinit var colorArrayList : ArrayList<Int>
 
     override fun onCreateFinished() {
         binding.currentDate.text = Tools().currentTime()
 
-        setupRecyclerView()
+        setupModeRecyclerView()
         setupColorRecyclerView()
     }
 
     override fun initializeListeners() {
-        binding.addButton.onClick {
+        binding.addButton.setOnClickListener {
             checkEditText()
         }
     }
 
     override fun observeEvents() {}
 
-    private fun checkEditText(){
-        val title = binding.titleEditText.getTextString().capitalize()
-        val note = binding.noteEditText.getTextString().capitalize()
+    private fun checkEditText() {
+        val title = binding.titleEditText.getTextString()
+            .replaceFirstChar { if (it.isLowerCase()) it.titlecase(Locale.ROOT) else it.toString() }
+        val note = binding.noteEditText.getTextString()
+            .replaceFirstChar { if (it.isLowerCase()) it.titlecase(Locale.getDefault()) else it.toString() }
 
         if (title.isBlank()) return requireContext().showToast(getString(R.string.emptyTitle))
         if (note.isBlank()) return requireContext().showToast(getString(R.string.emptyNote))
         if (selectedMood.isNullOrBlank()) return requireContext().showToast(getString(R.string.emptyMode))
-        else saveNote(title = title,note = note, mood = selectedMood!!,selectedBackgroundColor!!)
+        else saveNote(title = title, note = note, mood = selectedMood?:getString(R.string.modeNotr), color= selectedBackgroundColor?:R.color.white)
     }
 
     private fun saveNote(title : String, note : String, mood : String,color : Int){
@@ -55,51 +58,58 @@ class AddNoteFragment : BaseFragment<FragmentAddNoteBinding, AddNoteViewModel>(
         requireContext().showToast(getString(R.string.noteSharedSuccessfully))
     }
 
-    private fun setupRecyclerView(){
-        val modeArrayList = ArrayList<String>()
-        modeArrayList.add(getString(R.string.modeHappy))
-        modeArrayList.add(getString(R.string.modeSad))
-        modeArrayList.add(getString(R.string.modeNotr))
-        modeArrayList.add(getString(R.string.modeInspiration))
-        modeArrayList.add(getString(R.string.modeStar))
-        modeArrayList.add(getString(R.string.modeApplicationIdea))
-        modeArrayList.add(getString(R.string.modeWork))
+    private fun setupModeRecyclerView(){
+        val modeList = listOf(
+            getString(R.string.modeHappy),
+            getString(R.string.modeSad),
+            getString(R.string.modeNotr),
+            getString(R.string.modeInspiration),
+            getString(R.string.modeStar),
+            getString(R.string.modeApplicationIdea),
+            getString(R.string.modeWork),
+            getString(R.string.modeHoliday)
+        )
 
+        modeAdapter = ModeAdapter().apply {
+            addModeList(modeList)
+
+            setOnClickListener { mode ->
+                selectedMood = mode
+            }
+        }
 
         binding.modeRecyclerView.apply {
             layoutManager = FlexboxLayoutManager(requireContext())
-            adapter = ModeAdapter(modeArrayList, object : MoteItemClickListener{
-                override fun onModeItemClick(mode: String) {
-                  selectedMood = mode
-                }
-            })
+            adapter = modeAdapter
         }
     }
 
     private fun setupColorRecyclerView(){
-        colorArrayList = ArrayList<Int>()
-        colorArrayList.add(R.color.white)
-        colorArrayList.add(R.color.color1)
-        colorArrayList.add(R.color.color2)
-        colorArrayList.add(R.color.color3)
-        colorArrayList.add(R.color.color4)
-        colorArrayList.add(R.color.color5)
-        colorArrayList.add(R.color.color6)
-        colorArrayList.add(R.color.color7)
-        colorArrayList.add(R.color.color8)
-        colorArrayList.add(R.color.color9)
+        val colorList = listOf(
+            R.color.white,
+            R.color.color1,
+            R.color.color2,
+            R.color.color3,
+            R.color.color4,
+            R.color.color5,
+            R.color.color6,
+            R.color.color7,
+            R.color.color8,
+            R.color.color9,
+        )
 
+        colorAdapter = ColorAdapter(object : ColorItemClickListener{
+            override fun onColorItemClick(color: Int) {
+                selectedBackgroundColor = color
+            }
+        })
+
+        colorAdapter.addColorList(colorList)
 
         binding.colorRecyclerView.apply {
             layoutManager = LinearLayoutManager(requireContext(),LinearLayoutManager.HORIZONTAL,false)
-            adapter = ColorAdapter(colorArrayList,object : ColorItemClickListener{
-                override fun onColorItemClick(color: Int) {
-                    selectedBackgroundColor = color
-                }
-            })
+            adapter = colorAdapter
         }
-
-
     }
 
 }

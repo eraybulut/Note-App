@@ -8,9 +8,9 @@ import com.eraybulut.noteapp.databinding.ItemNoteBinding
 import com.eraybulut.noteapp.model.Note
 import com.eraybulut.noteapp.utils.extensions.setTintColor
 
-class HomeNoteAdapter(
+class NoteAdapter(
     private val listener: NoteItemClickListener
-) : RecyclerView.Adapter<HomeNoteAdapter.CardViewHolder>() {
+) : RecyclerView.Adapter<NoteAdapter.CardViewHolder>() {
 
     private var noteList = ArrayList<Note>()
 
@@ -34,7 +34,6 @@ class HomeNoteAdapter(
 
     override fun getItemCount(): Int = noteList.size
 
-
     @SuppressLint("NotifyDataSetChanged")
     fun setData(newList: ArrayList<Note>) {
         this.noteList.clear()
@@ -42,8 +41,8 @@ class HomeNoteAdapter(
         notifyDataSetChanged()
     }
 
-    fun removeItem(position: Int) {
-        listener.onDeleteItem(noteList[position])
+    fun deleteNote(position: Int) {
+        listener.onDeleteItem(noteList[position],position)
         this.noteList.removeAt(position)
         notifyItemRemoved(position)
     }

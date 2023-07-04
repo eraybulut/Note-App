@@ -7,7 +7,7 @@
     tools:context=".ui.home.HomeFragment">
 
     <LinearLayout
-        android:id="@+id/dontHaveNoteLayout"
+        android:id="@+id/lyt_dontHaveANote"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
@@ -30,7 +30,7 @@
             android:text="@string/notHaveNote"
             android:textAlignment="center"
             android:textColor="@color/black"
-            android:textSize="18dp" />
+            android:textSize="18sp" />
 
     </LinearLayout>
 

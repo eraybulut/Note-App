@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="modes">
+        <item >😀 Happy</item>
+        <item >😞 Sad</item>
+        <item >😐 Nötr</item>
+        <item >🥳 Inspiration Came</item>
+        <item >🤩 Star Idea</item>
+        <item >🤩 Star Idea</item>
+        <item >📱 Application Idea</item>
+        <item >💼 Work</item>
+        <item >🌴 Holiday</item>
+    </string-array>
+</resources>

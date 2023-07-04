@@ -1,6 +1,5 @@
 package com.eraybulut.noteapp.utils.extensions
 
-import android.content.Context
 import android.graphics.drawable.Drawable
 import android.view.View
 import android.widget.EditText
@@ -10,7 +9,7 @@ import androidx.annotation.DrawableRes
 import androidx.core.content.ContextCompat
 
 
-fun View.visibly(){
+fun View.visible(){
     this.visibility = View.VISIBLE
 }
 
@@ -25,11 +24,6 @@ fun View.gone(){
 fun EditText.getTextString() : String{
     return text.toString().trim()
 }
-
-fun View.onClick(onClick: (View) -> Unit) {
-    setOnClickListener(onClick)
-}
-
 fun View.setTintColor(@ColorRes colorRes: Int){
     background.setTint(ContextCompat.getColor(context,colorRes))
 }

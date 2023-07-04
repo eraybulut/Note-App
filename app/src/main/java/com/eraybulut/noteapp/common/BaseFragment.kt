@@ -18,15 +18,11 @@ abstract class BaseFragment<VB : ViewBinding, VM : ViewModel>(
     protected abstract val viewModel: VM
     protected abstract fun onCreateFinished()
     protected abstract fun initializeListeners()
-    protected abstract fun observeEvents()
+    protected open abstract fun observeEvents()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         _binding = bindingInflater.invoke(inflater)
-        if (_binding == null) {
-            throw IllegalArgumentException("Binding null")
-        }
-
         return binding.root
     }
 

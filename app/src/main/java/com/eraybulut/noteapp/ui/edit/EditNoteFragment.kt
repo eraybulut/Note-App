@@ -7,11 +7,13 @@ import com.eraybulut.noteapp.R
 import com.eraybulut.noteapp.common.BaseFragment
 import com.eraybulut.noteapp.databinding.FragmentEditNoteBinding
 import com.eraybulut.noteapp.model.Note
-import com.eraybulut.noteapp.service.Tools
+import com.eraybulut.noteapp.utils.Tools
 import com.eraybulut.noteapp.utils.extensions.getTextString
-import com.eraybulut.noteapp.utils.extensions.onClick
+import com.eraybulut.noteapp.utils.extensions.shareText
 import com.eraybulut.noteapp.utils.extensions.showToast
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class EditNoteFragment : BaseFragment<FragmentEditNoteBinding, EditNoteViewModel>(
     FragmentEditNoteBinding::inflate
 ) {
@@ -26,17 +28,17 @@ class EditNoteFragment : BaseFragment<FragmentEditNoteBinding, EditNoteViewModel
     }
 
     override fun initializeListeners() {
-        binding.deleteNoteButton.onClick {
+        binding.deleteNoteButton.setOnClickListener {
             viewModel.deleteNote(args.currentNote)
             findNavController().popBackStack()
         }
 
-        binding.updateButton.onClick {
+        binding.updateButton.setOnClickListener {
             checkEditText()
         }
 
-        binding.shareNoteButton.onClick {
-            Tools().shareText(requireContext(),args.currentNote)
+        binding.shareNoteButton.setOnClickListener {
+            requireContext().shareText(note = args.currentNote)
         }
     }
 
@@ -52,7 +54,9 @@ class EditNoteFragment : BaseFragment<FragmentEditNoteBinding, EditNoteViewModel
     }
 
     private fun updateNote(title : String,note : String){
-        val noteModel = Note(args.currentNote.id,title,note,args.currentNote.mood,Tools().currentTime(),R.color.white)
+        val noteModel = Note(args.currentNote.id,title,note,args.currentNote.mood,
+            Tools().currentTime(),args.currentNote.backgroundColor)
+
         viewModel.updateNote(noteModel)
         requireContext().showToast(getString(R.string.updatedNote))
         findNavController().popBackStack()

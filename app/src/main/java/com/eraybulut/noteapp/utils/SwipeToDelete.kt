@@ -1,16 +1,15 @@
-package com.eraybulut.noteapp.service
+package com.eraybulut.noteapp.utils
 
 import android.graphics.Canvas
 import android.graphics.Color
-import android.graphics.Path.Direction
 import android.graphics.drawable.GradientDrawable
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.RecyclerView
 import com.eraybulut.noteapp.R
-import com.eraybulut.noteapp.ui.home.HomeNoteAdapter
+import com.eraybulut.noteapp.ui.home.NoteAdapter
 
-class SwipeToDeleteCallback(private val adapter: HomeNoteAdapter) :
+class SwipeToDeleteCallback(private val adapter: NoteAdapter) :
     ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.LEFT or ItemTouchHelper.RIGHT) {
 
     override fun onMove(
@@ -22,7 +21,7 @@ class SwipeToDeleteCallback(private val adapter: HomeNoteAdapter) :
     }
 
     override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
-        if (direction == ItemTouchHelper.RIGHT) adapter.removeItem(viewHolder.adapterPosition)
+        if (direction == ItemTouchHelper.RIGHT) adapter.deleteNote(viewHolder.adapterPosition)
         if (direction == ItemTouchHelper.LEFT) adapter.shareNote(viewHolder.adapterPosition)
     }
 

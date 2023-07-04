@@ -1,4 +1,4 @@
-package com.eraybulut.noteapp.service
+package com.eraybulut.noteapp.utils
 
 import android.annotation.SuppressLint
 import android.content.Context
@@ -14,13 +14,5 @@ class Tools {
         val time = Calendar.getInstance().time
         val formatter = SimpleDateFormat("dd/MM/yyyy")
         return formatter.format(time)
-    }
-
-    fun shareText(context: Context,note : Note){
-        val shareIntent = Intent()
-        shareIntent.action = Intent.ACTION_SEND
-        shareIntent.putExtra(Intent.EXTRA_TEXT,"${note.title}\n${note.note} \nTarihinde kaydedilmiştir${note.date}")
-        shareIntent.type = "text/plain"
-        context.startActivity(shareIntent)
     }
 }

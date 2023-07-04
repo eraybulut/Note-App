@@ -1,26 +1,17 @@
 package com.eraybulut.noteapp.ui.add
 
-import android.app.Application
+import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.eraybulut.noteapp.common.BaseViewModel
-import com.eraybulut.noteapp.data.local.NoteDatabase
 import com.eraybulut.noteapp.data.repository.NoteRepository
 import com.eraybulut.noteapp.model.Note
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
-class AddNoteViewModel(application: Application) : BaseViewModel(application) {
+@HiltViewModel
+class AddNoteViewModel @Inject constructor (private val noteRepository :NoteRepository) : ViewModel(){
 
-    private val noteRepository : NoteRepository
-
-    init {
-        val noteDao = NoteDatabase.getDatabase(application).noteDao()
-        noteRepository = NoteRepository(noteDao)
+    fun addNote(note: Note) = viewModelScope.launch{
+       noteRepository.addNote(note)
     }
-
-    fun addNote(note: Note){
-        viewModelScope.launch {
-            noteRepository.addNote(note)
-        }
-    }
-
 }

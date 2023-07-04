@@ -1,29 +1,29 @@
 package com.eraybulut.noteapp.ui.home
 
-import android.app.Application
-import androidx.lifecycle.LiveData
+import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.eraybulut.noteapp.common.BaseViewModel
-import com.eraybulut.noteapp.data.local.NoteDatabase
 import com.eraybulut.noteapp.data.repository.NoteRepository
 import com.eraybulut.noteapp.model.Note
+import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
-class HomeFragmentViewModel(application: Application) : BaseViewModel(application)  {
-
-    val readAllData: LiveData<List<Note>>
-    private val noteRepository : NoteRepository
+@HiltViewModel
+class HomeFragmentViewModel @Inject constructor(
+    private val noteRepository: NoteRepository
+) : ViewModel() {
 
     init {
-        val noteDao = NoteDatabase.getDatabase(application).noteDao()
-        noteRepository = NoteRepository(noteDao)
-        readAllData = noteRepository.readAllNote
+        readAllData()
     }
 
+    fun deleteNote(note: Note) = viewModelScope.launch {
+        noteRepository.deleteNote(note = note)
+    }
 
-    fun deleteNote(note: Note){
-        viewModelScope.launch {
-            noteRepository.deleteNote(note = note)
-        }
+    fun readAllData(): Flow<List<Note>> = flow {
+        emit(noteRepository.readAllNote())
     }
 }

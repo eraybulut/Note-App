@@ -1,32 +1,27 @@
 package com.eraybulut.noteapp.ui.home
 
-import android.annotation.SuppressLint
-import android.util.Log
-import android.view.MotionEvent
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.Observer
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.ItemTouchHelper
-import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import com.eraybulut.noteapp.R
 import com.eraybulut.noteapp.common.BaseFragment
 import com.eraybulut.noteapp.databinding.FragmentHomeBinding
 import com.eraybulut.noteapp.model.Note
-import com.eraybulut.noteapp.service.SwipeToDeleteCallback
-import com.eraybulut.noteapp.service.Tools
+import com.eraybulut.noteapp.utils.SwipeToDeleteCallback
 import com.eraybulut.noteapp.utils.extensions.gone
-import com.eraybulut.noteapp.utils.extensions.onClick
+import com.eraybulut.noteapp.utils.extensions.shareText
 import com.eraybulut.noteapp.utils.extensions.showToast
-import com.eraybulut.noteapp.utils.extensions.visibly
-import java.util.Timer
-import kotlin.concurrent.fixedRateTimer
+import com.eraybulut.noteapp.utils.extensions.visible
+import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.launch
 
+@AndroidEntryPoint
 class HomeFragment : BaseFragment<FragmentHomeBinding, HomeFragmentViewModel>(
     FragmentHomeBinding::inflate
 ) {
 
-    private lateinit var noteAdapter: HomeNoteAdapter
+    private lateinit var noteAdapter: NoteAdapter
     override val viewModel by viewModels<HomeFragmentViewModel>()
 
     override fun onCreateFinished() {
@@ -35,43 +30,48 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomeFragmentViewModel>(
     }
 
     override fun initializeListeners() {
-        binding.floatingActionButton.onClick {
+        binding.floatingActionButton.setOnClickListener {
             findNavController().navigate(R.id.home_to_addNoteFragment)
         }
     }
 
     override fun observeEvents() {
-        viewModel.readAllData.observe(viewLifecycleOwner, Observer { noteData ->
-            if (noteData.isNullOrEmpty()) binding.dontHaveNoteLayout.visibly()
-            else {
-                noteAdapter.setData(ArrayList(noteData))
-                binding.dontHaveNoteLayout.gone()
+        lifecycleScope.launch {
+            viewModel.readAllData().collect{ noteData ->
+                if (noteData.isEmpty()){
+                    binding.lytDontHaveANote.visible()
+                }
+                else {
+                    noteAdapter.setData(ArrayList(noteData))
+                    binding.lytDontHaveANote.gone()
+                }
             }
-        })
+        }
     }
 
-    private fun setupHomeRecyclerView(){
-        noteAdapter = HomeNoteAdapter(object : NoteItemClickListener {
+    private fun setupHomeRecyclerView() {
+        noteAdapter = NoteAdapter(object : NoteItemClickListener {
             override fun onItemClick(note: Note) {
                 val action = HomeFragmentDirections.homeToEditNoteFragment(currentNote = note)
                 findNavController().navigate(action)
             }
 
-            override fun onDeleteItem(note: Note) {
+            override fun onDeleteItem(note: Note,position : Int) {
                 viewModel.deleteNote(note = note)
                 requireContext().showToast(getString(R.string.deleteNotedSuccessfully))
             }
 
             override fun onShareItem(note: Note) {
-                Tools().shareText(requireContext(), note = note)
+                requireContext().shareText(note = note)
             }
         })
     }
 
-    private fun setupSwipeToView(){
+    private fun setupSwipeToView() = with(binding) {
         val swipeToDeleteCallback = SwipeToDeleteCallback(noteAdapter)
         val itemTouchHelper = ItemTouchHelper(swipeToDeleteCallback)
-        binding.noteRecyclerView.apply {
+
+        noteRecyclerView.apply {
             adapter = noteAdapter
             itemTouchHelper.attachToRecyclerView(this)
         }

@@ -22,7 +22,7 @@
     <string name="modeStar">🤩 Star Fikir</string>
     <string name="modeApplicationIdea">📱 Uygulama Fikri</string>
     <string name="modeWork">💼 İş</string>
-
+    <string name="modeHoliday">🎄 Tatil</string>
 
     -------> Toast
     <string name="emptyTitle">Başlık kısmını boş bırakmayınız</string>

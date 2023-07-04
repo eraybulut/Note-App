@@ -1,21 +1,17 @@
 package com.eraybulut.noteapp.ui.edit
 
 import android.app.Application
+import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.eraybulut.noteapp.common.BaseViewModel
 import com.eraybulut.noteapp.data.local.NoteDatabase
 import com.eraybulut.noteapp.data.repository.NoteRepository
 import com.eraybulut.noteapp.model.Note
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
-class EditNoteViewModel(application: Application) : BaseViewModel(application) {
-
-    private val noteRepository : NoteRepository
-
-    init {
-        val noteDao = NoteDatabase.getDatabase(application).noteDao()
-        noteRepository = NoteRepository(noteDao)
-    }
+@HiltViewModel
+class EditNoteViewModel @Inject constructor (private val noteRepository: NoteRepository): ViewModel() {
 
     fun deleteNote(note : Note){
         viewModelScope.launch {

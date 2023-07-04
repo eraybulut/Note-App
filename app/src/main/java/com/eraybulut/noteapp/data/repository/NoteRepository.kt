@@ -1,22 +1,24 @@
 package com.eraybulut.noteapp.data.repository
 
-import androidx.lifecycle.LiveData
 import com.eraybulut.noteapp.data.local.NoteDao
 import com.eraybulut.noteapp.model.Note
+import javax.inject.Inject
 
-class NoteRepository(private val noteDao: NoteDao) {
+class NoteRepository @Inject constructor(private val noteDao: NoteDao) {
 
-    val readAllNote : LiveData<List<Note>> = noteDao.readAllNote()
+    suspend fun readAllNote(): List<Note> {
+        return noteDao.readAllNote()
+    }
 
-    suspend fun addNote(note: Note){
+    suspend fun addNote(note: Note) {
         noteDao.addNote(note = note)
     }
 
-    suspend fun updateNote(note: Note){
+    suspend fun updateNote(note: Note) {
         noteDao.updateNote(note = note)
     }
 
-    suspend fun deleteNote(note: Note){
+    suspend fun deleteNote(note: Note) {
         noteDao.deleteNote(note = note)
     }
 }

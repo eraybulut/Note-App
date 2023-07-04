@@ -1,6 +1,5 @@
 package com.eraybulut.noteapp.data.local
 
-import androidx.lifecycle.LiveData
 import androidx.room.*
 import com.eraybulut.noteapp.model.Note
 
@@ -11,7 +10,7 @@ interface NoteDao {
     suspend fun addNote(note : Note)
 
     @Query("SELECT * FROM note_table")
-    fun readAllNote() : LiveData<List<Note>>
+    suspend fun readAllNote() : List<Note>
 
     @Update
     suspend fun updateNote(note: Note)
