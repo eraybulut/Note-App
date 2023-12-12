@@ -19,10 +19,6 @@ A note-taking app using the Room library.
   </br>
   
 ### Package Structure
-
-| Package | 
-| ----- | 
-|<img src="media/package.png" width="250" height="600"/>|
  
   </br>
   
